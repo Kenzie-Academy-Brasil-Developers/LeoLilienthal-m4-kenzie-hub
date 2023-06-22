@@ -1,31 +1,27 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { api } from "../../services/api";
+import { Link } from "react-router-dom";
 import { StyledDiv } from "./style";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "./LoginSchema";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
 
 export const Login = () => {
-  const { register, handleSubmit,formState:{errors}, reset } = useForm({
-    resolver: zodResolver(LoginSchema)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: zodResolver(LoginSchema),
   });
 
-  const navigate = useNavigate();
-
-  const loginUser = async (formData) =>{
-    try {
-      const {data} = await api.post('/sessions', formData);
-      localStorage.setItem("KENZIEHUB@TOKEN" , data.token)
-      navigate("/")
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const { loginUser } = useContext(UserContext);
 
   const submit = (formData) => {
-    loginUser(formData)
+    loginUser(formData);
     reset();
-  }
+  };
 
   return (
     <StyledDiv>
@@ -52,7 +48,9 @@ export const Login = () => {
         </div>
         <button type="submit">Entrar</button>
         <h4>Ainda não possui conta?</h4>
-        <Link to="/Register" className="styledLink">Cadastre-se</Link>
+        <Link to="/Register" className="styledLink">
+          Cadastre-se
+        </Link>
       </form>
     </StyledDiv>
   );

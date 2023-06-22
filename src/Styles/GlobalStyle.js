@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 
-
 export const GlobalStyle = createGlobalStyle`
     :root{
         --font-primary:'Inter', sans-Serif;
@@ -15,5 +14,4 @@ export const GlobalStyle = createGlobalStyle`
         --Sucess:#3FE864;
         --Negative:#E83F5B;
     }
-`
-
+`;

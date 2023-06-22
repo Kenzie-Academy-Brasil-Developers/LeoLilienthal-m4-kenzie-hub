@@ -1,22 +1,14 @@
-import { Link, useNavigate } from "react-router-dom"
-import {StyledHeader} from "./style"
+import { StyledHeader } from "./style";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
 
-export const Header = () =>{
+export const Header = () => {
+  const { logOut } = useContext(UserContext);
 
-    const navigate = useNavigate();
-
-    const logOut = () =>{
-        
-        localStorage.clear()
-        navigate("/Login")
-    }
-    return(
-        <>
-            <StyledHeader>
-                <h2>Kenzie Hub</h2>
-                <button onClick={logOut}>Sair</button>
-            </StyledHeader>
-        </>
-
-    )
-}
+  return (
+    <StyledHeader>
+      <h2>Kenzie Hub</h2>
+      <button onClick={logOut}>Sair</button>
+    </StyledHeader>
+  );
+};

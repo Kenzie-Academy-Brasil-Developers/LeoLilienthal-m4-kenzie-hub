@@ -1,15 +1,16 @@
 import { GlobalStyle } from "./Styles/GlobalStyle";
 import { ResetStyle } from "./Styles/reset";
-import { HomePage } from "./pages/HomePage";
 import { RoutesMain } from "./routes/RoutesMain";
+import { UserProvider } from "./providers/UserContext";
 
-export const App= () => {
+export const App = () => {
   return (
     <div className="App">
-      <GlobalStyle/>
-      <ResetStyle/>
-      <RoutesMain />
+      <GlobalStyle />
+      <ResetStyle />
+      <UserProvider>
+        <RoutesMain />
+      </UserProvider>
     </div>
   );
-}
-
+};

@@ -1,27 +1,22 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { api } from "../../services/api";
+import { Link } from "react-router-dom";
 import { StyledDiv } from "./style";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema } from "./RegisterSchema";
+import { UserContext } from "../../providers/UserContext";
+import { useContext } from "react";
 
-export const Register = ({ setUserList }) => {
-  const { register, handleSubmit,formState:{errors}, reset } = useForm({
-    resolver: zodResolver(RegisterSchema)
+export const Register = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: zodResolver(RegisterSchema),
   });
 
-  const navigate = useNavigate();
-
-  const createUser = async (formData) => {
-    try {
-      const { data } = await api.post("/users", formData);
-
-      setUserList((userList) => [...userList, data]);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { createUser } = useContext(UserContext);
 
   const submit = (formData) => {
     createUser(formData);
@@ -32,7 +27,7 @@ export const Register = ({ setUserList }) => {
     <StyledDiv>
       <div className="topTitle">
         <h1>Kenzie Hub</h1>
-        <Link to="/Login" className="StyledLink">
+        <Link to="/" className="StyledLink">
           Voltar
         </Link>
       </div>

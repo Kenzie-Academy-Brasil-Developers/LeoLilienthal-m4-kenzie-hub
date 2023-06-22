@@ -32,4 +32,4 @@ export const ResetStyle = createGlobalStyle`
     img{
         max-width:100%;
     }
-`
+`;
