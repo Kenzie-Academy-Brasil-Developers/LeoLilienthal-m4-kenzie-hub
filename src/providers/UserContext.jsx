@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
 
@@ -6,8 +6,36 @@ export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const currentPath = window.location.pathname;
+
+  useEffect(() => {
+    const token = localStorage.getItem("KENZIEHUB@TOKEN");
+    const loadUser = async () => {
+      try {
+        setLoading(true);
+        const { data } = await api.get("/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUser(data);
+        navigate(currentPath);
+      } catch (error) {
+        console.log(error);
+        localStorage.removeItem("KENZIEHUB@TOKEN");
+        localStorage.removeItem("KENZIEHUB@ID");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (token) {
+      loadUser();
+    }
+  }, []);
 
   const loginUser = async (formData) => {
     try {
@@ -45,7 +73,7 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, loginUser, createUser, logOut }}>
+    <UserContext.Provider value={{ user, loginUser, createUser, logOut, loading }}>
       {children}
     </UserContext.Provider>
   );
