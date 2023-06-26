@@ -56,8 +56,24 @@ export const TechsProvider = ({ children }) => {
   }
 
   const editTech = async (currentId, formData) =>{
-    await deleteTech(currentId);
-    await createTech(formData);
+    const token = localStorage.getItem("KENZIEHUB@TOKEN");
+    try {
+      const {data} = await api.put(`/users/techs/${currentId}`,formData,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      setTechsList((techsList) => techsList.map(currentTech =>{
+        if(currentTech.id === data.id){
+          return data;
+        }
+        return currentTech;
+      }))
+
+    } catch (error) {
+      console.log(error)
+      
+    }
   }
 
   return (

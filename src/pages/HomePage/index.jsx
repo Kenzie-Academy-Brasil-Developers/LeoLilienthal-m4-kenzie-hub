@@ -9,10 +9,11 @@ import { EditingBox } from "../../components/EditingBox";
 
 export const HomePage = () => {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [isEditing, setIsEditing] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   const { user } = useContext(UserContext);
   const { techsList, deleteTech, editTech } = useContext(TechsContext);
+  const [tech, setTech] = useState(null);
 
   if (!user) {
     return <h1>carregando</h1>;
@@ -36,13 +37,7 @@ export const HomePage = () => {
           />
         ) : null}
         {isEditing ? (
-          <EditingBox
-            dellCallback={async () => {
-              await deleteTech(isEditing.id);
-              setIsEditing(null);
-            }}
-            falseCallback={() => setIsEditing(null)}
-          >
+          <EditingBox setIsEditing = {setIsEditing} tech={tech}>
             <h2> {user.techs[0].title}</h2>
           </EditingBox>
         ) : null}
@@ -51,7 +46,10 @@ export const HomePage = () => {
             <li
               className="techName"
               key={currentTech.id}
-              onClick={() => setIsEditing(currentTech)}
+              onClick={() => {
+                setIsEditing(true)
+                setTech(currentTech)
+              }}
             >
               <h2>{currentTech.title}</h2>
               <h3>{currentTech.status}</h3>

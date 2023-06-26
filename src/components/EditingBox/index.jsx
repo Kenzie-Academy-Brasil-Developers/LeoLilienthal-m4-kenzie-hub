@@ -3,28 +3,30 @@ import { StyledDiv, StyledForm } from "./style";
 import { useContext } from "react";
 import { TechsContext } from "../../providers/TechsContext";
 
-export const EditingBox = ({ children, dellCallback, falseCallback }) => {
+export const EditingBox = ({ children, setIsEditing, tech }) => {
   const { register, handleSubmit } = useForm();
-  const { createTech } = useContext(TechsContext);
+  const { deleteTech, editTech } = useContext(TechsContext);
 
   const submit = (formData) => {
     const data = { ...formData };
-    createTech(data);
+    editTech(tech.id, data);
+    setIsEditing(false)
   };
+  
   return (
     <StyledDiv>
       <div className="modalOverlay" role="dialog">
         <div className="modalBox">
           <div className="modalHeader">
             <p>Detalhes da Tecnologia</p>
-            <button onClick={falseCallback}>X</button>
+            <button onClick={()=>setIsEditing(false)}>X</button>
           </div>
           <StyledForm onSubmit={handleSubmit(submit)}>
             <div className="inputContainer">
               <h3>nome</h3>
               <input
-                {...register("title")}
-                placeholder={children.props.children[1]}
+                readOnly
+                value={tech.title}
               />
             </div>
             <div className="inputSelect">
@@ -36,10 +38,10 @@ export const EditingBox = ({ children, dellCallback, falseCallback }) => {
               </select>
             </div>
             <div className="formBtns">
-              <button className="saveBtn" type="submit" onClick={dellCallback}>
+              <button className="saveBtn" type="submit" >
                 Salvar alterações
               </button>
-              <button className="delBtn" onClick={dellCallback}>
+              <button className="delBtn" onClick={() =>deleteTech(tech.id)}>
                 Excluir
               </button>
             </div>
