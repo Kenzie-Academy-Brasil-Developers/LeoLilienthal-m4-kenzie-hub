@@ -11,6 +11,9 @@ export const StyledDiv = styled.div`
 
   height: 7rem;
   margin-bottom: 2rem;
+  width:clamp(320px,70vw,1400px);
+  padding-inline:50px;
+  box-sizing:border-box;
 
   .title {
     color: var(--Grey-0);
@@ -20,6 +23,6 @@ export const StyledDiv = styled.div`
   .course {
     color: var(--Grey-1);
     font-size: 0.75rem;
-    margin-right: 18vw;
   }
+  
 `;

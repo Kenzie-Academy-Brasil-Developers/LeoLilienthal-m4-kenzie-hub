@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
 export const StyledDiv = styled.div`
-  .modalOverlay {
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
     position: fixed;
     width: 100%;
     height: 100vh;
@@ -11,10 +14,9 @@ export const StyledDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  
   .modalBox {
     background: var(--Grey-3);
-    width: 100%;
     max-width: 400px;
     height: 50vh;
 
@@ -26,14 +28,21 @@ export const StyledDiv = styled.div`
   .modalHeader {
     display: flex;
     justify-content: space-between;
-    align-items: start;
+    align-items: center;
+    padding-inline:15px;
     width: 400px;
-    margin-right: 40vh;
+    height:50px;
     background: var(--Grey-2);
+  }
+  .modalHeader > p{
+    color: var(--Grey-0)
   }
   .modalHeader > h2 {
     color: var(--Grey-0);
     font-size: 0.875rem;
+  }
+  .inputContainer{
+    margin-bottom:1rem;
   }
   .inputContainer > h3 {
     font-weight: 400;
@@ -61,6 +70,7 @@ export const StyledDiv = styled.div`
     border-radius: 4px;
     padding: 0.625rem 1rem;
     margin-bottom: 1rem;
+    width:300px;
   }
   .saveBtn {
     background: var(--color-primary-Negative);
@@ -80,6 +90,7 @@ export const StyledDiv = styled.div`
   }
   .formBtns {
     display: flex;
+    gap:1rem;
   }
 `;
 

@@ -4,10 +4,10 @@ export const StyledDiv = styled.div`
   background: var(--Grey-4);
   height: 100vh;
   font-family: var(--font-primary);
-
-  div {
-    padding-left: 18.5vw;
-  }
+  display: flex;
+  flex-direction: column;
+  padding-top:1rem;
+  align-items: center;
 
   div > h3 {
     font-weight: 700;
@@ -24,16 +24,20 @@ export const StyledDiv = styled.div`
   }
   .techList {
     color: var(--Grey-0);
+    
   }
   .createContainer {
     display: flex;
     justify-content: space-between;
+    width: clamp(320px, 70vw, 1400px);
+    padding-inline: 50px;
+    box-sizing: border-box;
   }
   .createContainer > h2 {
     color: var(--Grey-0);
   }
   .createContainer > button {
-    margin-right: 20vw;
+    
     border: none;
     border-radius: 8px;
     padding: 10px 15px;

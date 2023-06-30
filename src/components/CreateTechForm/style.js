@@ -34,14 +34,18 @@ export const StyledDiv = styled.div`
   .modalHeader {
     display: flex;
     justify-content: space-between;
-    align-items: start;
+    align-items: center;
+    padding-inline:15px;
     width: 400px;
-    margin-right: 40vh;
+    height:50px;
     background: var(--Grey-2);
   }
   .modalHeader > h2 {
     color: var(--Grey-0);
     font-size: 0.875rem;
+  }
+  .inputContainer{
+    margin-bottom:1rem;
   }
   .inputContainer > h3 {
     font-weight: 400;
@@ -64,7 +68,7 @@ export const StyledDiv = styled.div`
   .inputSelect > select {
     background: var(--Grey-2);
     color: var(--Grey-1);
-    width: 21vw;
+    width: 300px;
     border: none;
     border-radius: 4px;
     padding: 0.625rem 1rem;
@@ -74,6 +78,7 @@ export const StyledDiv = styled.div`
     background: var(--color-primary-Negative);
     padding: 10px 40px;
     border-radius: 4px;
+    width: 300px;
   }
   .btn:hover {
     background: var(--color-primary);
